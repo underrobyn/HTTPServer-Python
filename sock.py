@@ -16,7 +16,7 @@ class ServerSock(Thread):
 
 		# Make server listen for connections
 		self.sock.bind((self.host, self.port))
-		self.sock.listen(1)
+		self.sock.listen(5)
 
 		# Create socket specific attributes
 		self.clients = []
@@ -46,7 +46,7 @@ class ServerSock(Thread):
 			print("Socket connected: %s" % address[0])
 
 	def close(self):
-		print("Closing server socket (host %s, port %s)" % (self.host, self.port))
+		print("Closing server socket %s:%s" % (self.host, self.port))
 
 		# If the socket still exists, close it
 		if self.sock:

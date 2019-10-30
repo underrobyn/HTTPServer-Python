@@ -32,6 +32,8 @@ class ServerSock(Thread):
 		self.timeout = 30 if "timeout" not in settings else settings["timeout"]
 
 	def listen(self):
+		print("Socket server running on %s:%s" % (self.host, self.port))
+
 		while True:
 			conn, address = self.sock.accept()
 

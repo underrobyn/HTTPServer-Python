@@ -23,13 +23,26 @@ class HTTPResponder:
 		# Create a response based on request data
 		self.decode_request(http_data)
 
-		HTTPRouter()
+		self.route = HTTPRouter(self)
 
 		# Form a response and send it
 		self.http_respond()
 
 	def decode_request(self, headers):
-		print(headers)
+		header_list = headers.split("\r\n")
+		protocol = ""
+		header_dict = {}
+
+		for i in header_list:
+			if ":" in i:
+				header_pair = i.split(": ")
+				print(header_pair)
+				header_dict[header_pair[0]] = header_pair[1]
+			else:
+				protocol = i
+
+		print(protocol)
+		print(header_dict)
 
 	def content_length(self):
 		self.headers["Content-Length"] = len(self.body)
@@ -47,7 +60,7 @@ class HTTPResponder:
 
 		return status
 
-	# Generate HTTP headers incl. status code
+	# Generate HTTP headers
 	def http_headers(self):
 		# Create break between protocol and headers
 		headers = "\r\n"

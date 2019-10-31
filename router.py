@@ -3,7 +3,10 @@ from settings import config
 
 class HTTPRouter:
 
-	def __init__(self):
+	def __init__(self, responder):
+		self.responder = responder
+
+
 		print(config)
 
 		FileServe()

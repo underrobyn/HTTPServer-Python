@@ -1,40 +1,56 @@
+from router import HTTPRouter
+from settings import config
+
 class HTTPResponder:
 
 	def __init__(self, socket, http_data):
+		# Request variables
+		self.method = "GET"
+		self.request_uri = "/"
+		self.request_headers = {}
+
+		# Response variables
 		self.status = 200
 		self.headers = {
 			"Server": "HTTPServer"
 		}
-		self.body = http_data
+		self.body = ""
 
+		# Data passed to class
 		self.socket = socket
 		self.http_data = http_data
 
-		self.decode_headers(http_data)
+		# Create a response based on request data
+		self.decode_request(http_data)
+
+		HTTPRouter()
+
+		# Form a response and send it
 		self.http_respond()
 
-	def decode_headers(self, headers):
-		pass
+	def decode_request(self, headers):
 		print(headers)
 
 	def content_length(self):
 		self.headers["Content-Length"] = len(self.body)
 
+	def http_status(self):
+		# Protocol being used
+		status = "HTTP/1.1 "
+
+		if self.status == 200:
+			status = status + "204 No Content"
+		elif self.status == 404:
+			status = status + "404 Not Found"
+		else:
+			status = status + "500 Internal Server Error"
+
+		return status
+
 	# Generate HTTP headers incl. status code
 	def http_headers(self):
-		# Protocol being used
-		headers = "HTTP/1.1 "
-
-		# TODO: Implement function to handle this.
-		if self.status == 200:
-			headers = headers + "200 OK"
-		elif self.status == 404:
-			headers = headers + "404 Not Found"
-		else:
-			headers = headers + "500 Internal Server Error"
-
 		# Create break between protocol and headers
-		headers = headers + "\r\n"
+		headers = "\r\n"
 
 		# Loop over headers in dictionary
 		for header in self.headers:
@@ -44,20 +60,22 @@ class HTTPResponder:
 		return headers
 
 	def http_body(self):
-		return self.body
+		# Break between headers and body
+		return "\r\n\n" + self.body
 
 	# Send a full HTTP response
 	def http_respond(self):
+		# Now we can formulate a valid HTTP response
 		response = ""
 
 		# Generate content-length header
 		self.content_length()
 
+		# Add protocol and status
+		response = response + self.http_status()
+
 		# Add HTTP Headers
 		response = response + self.http_headers()
-
-		# Break between headers and body
-		response = response + "\r\n\n"
 
 		# Add HTTP Body
 		response = response + self.http_body()

@@ -1,14 +1,9 @@
-from sock import ServerSock
-
-settings = {
-    "host":"0.0.0.0",
-    "port":3698,
-    "timeout":30
-}
+from sock import HTTPSock
+from settings import config
 
 def main():
-    server = ServerSock()
-    server.set_settings(settings)
+    server = HTTPSock()
+    server.set_settings(config)
     server.start()
 
 if __name__ == '__main__':

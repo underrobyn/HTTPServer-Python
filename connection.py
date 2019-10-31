@@ -1,6 +1,7 @@
 from threading import *
 from time import time
 from response import HTTPResponder
+from settings import config
 import console as c
 import select
 

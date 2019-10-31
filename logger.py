@@ -1,5 +1,6 @@
 from time import time
 from os.path import isfile
+from settings import config
 
 class HTTPLog:
 

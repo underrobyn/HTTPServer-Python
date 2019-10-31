@@ -1,0 +1,25 @@
+{
+    "console": {
+        "log_level": 4
+    },
+
+    "logs": {
+        "log_dir": "logs/",
+        "log_events": {
+            "http_event": true,
+            "sever_event": true
+        }
+    },
+
+    "router": {
+        "config_file": ".httpconf"
+    },
+
+    "socket": {
+        "host": "0.0.0.0",
+        "port": 3698,
+        "timeout": 30,
+        "max_clients": 1000,
+        "recv_size": 1024
+    }
+}

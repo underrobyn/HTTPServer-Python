@@ -1,8 +1,9 @@
 from threading import *
 from connection import HTTPClient
+from settings import config
 import socket
 
-class ServerSock(Thread):
+class HTTPSock(Thread):
 
 	def run(self):
 		# Create server socket
@@ -25,11 +26,11 @@ class ServerSock(Thread):
 		# Run the server
 		self.listen()
 
+	# Load settings
 	def set_settings(self, settings):
-		# Load settings
-		self.host = None if "host" not in settings else settings["host"]
-		self.port = 8080 if "port" not in settings else settings["port"]
-		self.timeout = 30 if "timeout" not in settings else settings["timeout"]
+		self.host = None if "host" not in settings["socket"] else settings["socket"]["host"]
+		self.port = 8080 if "port" not in settings["socket"] else settings["socket"]["port"]
+		self.timeout = 30 if "timeout" not in settings["socket"] else settings["socket"]["timeout"]
 
 	def listen(self):
 		print("Socket server running on %s:%s" % (self.host, self.port))

@@ -4,7 +4,8 @@
     },
 
     "logs": {
-        "log_dir": "logs/",
+        "log_dir": "logs",
+        "timestamp": true,
         "log_events": {
             "http_event": true,
             "sever_event": true

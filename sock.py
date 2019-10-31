@@ -1,5 +1,6 @@
 from threading import *
 from connection import HTTPClient
+from logger import HTTPLog
 from settings import config
 import socket
 
@@ -22,6 +23,7 @@ class HTTPSock(Thread):
 		# Create socket specific attributes
 		self.clients = []
 		self.client_count = 0
+		self.client_logger = HTTPLog(1, "httpclient", "text")
 
 		# Run the server
 		self.listen()
@@ -38,7 +40,7 @@ class HTTPSock(Thread):
 		while True:
 			conn, address = self.sock.accept()
 
-			c = HTTPClient(conn, address, self.client_count)
+			c = HTTPClient(conn, address, self.client_count, self.client_logger)
 			c.start()
 
 			self.clients.append(c)

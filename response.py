@@ -36,7 +36,6 @@ class HTTPResponder:
 		for i in header_list:
 			if ":" in i:
 				header_pair = i.split(": ")
-				print(header_pair)
 				header_dict[header_pair[0]] = header_pair[1]
 			else:
 				protocol = i
@@ -52,9 +51,31 @@ class HTTPResponder:
 		status = "HTTP/1.1 "
 
 		if self.status == 200:
+			status = status + "200 OK"
+		elif self.status == 204:
 			status = status + "204 No Content"
+		elif self.status == 400:
+			status = status + "400 Bad Request"
+		elif self.status == 401:
+			status = status + "401 Unauthorized"
+		elif self.status == 403:
+			status = status + "403 Forbidden"
 		elif self.status == 404:
 			status = status + "404 Not Found"
+		elif self.status == 405:
+			status = status + "405 Method Not Allowed"
+		elif self.status == 408:
+			status = status + "408 Request Timeout"
+		elif self.status == 410:
+			status = status + "410 Gone"
+		elif self.status == 414:
+			status = status + "414 URI Too Long"
+		elif self.status == 418:
+			status = status + "418 I'm a teapot"
+		elif self.status == 429:
+			status = status + "429 Too Many Requests"
+		elif self.status == 431:
+			status = status + "431 Request Header Fields Too Large"
 		else:
 			status = status + "500 Internal Server Error"
 

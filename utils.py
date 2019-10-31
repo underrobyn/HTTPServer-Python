@@ -11,13 +11,13 @@ def get_full_dir_link(dir):
 	return get_working_dir() + update_dir_link(dir)
 
 def check_dir_exists(dir):
-	return os.path.isdir(get_working_dir() + dir)
+	return os.path.isdir(dir)
 
 def check_file_exists(file):
-	return os.path.isfile(get_working_dir() + file)
+	return os.path.isfile(file)
 
 def create_dir_if_not_exists(dir):
-	if check_dir_exists(dir):
+	if not check_dir_exists(dir):
 		os.mkdir(dir)
 	return True
 

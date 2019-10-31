@@ -2,3 +2,10 @@
 /.idea/
 /venv/
 /__pycache__/
+
+# Server log files
+/logs/*.log
+/logs/*.csv
+
+# http_docs
+/www/*.html

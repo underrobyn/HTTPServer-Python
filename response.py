@@ -5,8 +5,9 @@ class HTTPResponder:
 
 	def __init__(self, socket, http_data):
 		# Request variables
-		self.method = "GET"
+		self.request_method = "GET"
 		self.request_uri = "/"
+		self.request_protocol = "/"
 		self.request_headers = {}
 
 		# Response variables
@@ -34,14 +35,19 @@ class HTTPResponder:
 		header_dict = {}
 
 		for i in header_list:
+			if len(i) == 0: continue
+
 			if ":" in i:
 				header_pair = i.split(": ")
 				header_dict[header_pair[0]] = header_pair[1]
 			else:
-				protocol = i
+				protocol = i.split(" ")
 
-		print(protocol)
-		print(header_dict)
+		self.request_headers = header_dict
+
+		self.request_method = protocol[0]
+		self.request_uri = protocol[1]
+		self.request_protocol = protocol[2]
 
 	def content_length(self):
 		self.headers["Content-Length"] = len(self.body)

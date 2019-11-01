@@ -10,6 +10,9 @@ def get_working_dir():
 def get_full_dir_link(dir):
 	return get_working_dir() + update_dir_link(dir)
 
+def get_dir_for_file(file):
+	return os.path.sep.join(file.split(os.path.sep)[:-1])
+
 def check_dir_exists(dir):
 	return os.path.isdir(dir)
 

@@ -53,7 +53,6 @@ class HTTPClient(Thread):
 				else:
 					self.data = self.data + received.decode('utf-8')
 					if self.data.endswith(u"\r\n"):
-						c.log(c.INFO, self.data)
 						HTTPResponder(self, self.data)
 
 		active_time = time() - self.created

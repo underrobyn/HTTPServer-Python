@@ -1,6 +1,29 @@
 from router import HTTPRouter
 from settings import config
 
+http_status_codes = {
+	200:"OK",
+	201:"Created",
+	202:"Accepted",
+	204:"No Content",
+	206:"Partial Content",
+
+	400:"Bad Request",
+	401:"Unauthorized",
+	403:"Forbidden",
+	404:"Not Found",
+	405:"Method Not Allowed",
+	408:"Request Timeout",
+	410:"Gone",
+	414:"URI Too Long",
+	418:"I'm a teapot",
+	429:"Too Many Requests",
+	431:"Request Header Fields Too Large",
+
+	500:"Internal Server Error",
+	501:"Not Implemented"
+}
+
 class HTTPResponder:
 
 	def __init__(self, socket, http_data):
@@ -53,39 +76,10 @@ class HTTPResponder:
 		self.headers["Content-Length"] = len(self.body)
 
 	def http_status(self):
-		# Protocol being used
-		status = "HTTP/1.1 "
+		if self.status not in http_status_codes:
+			self.status = 500
 
-		if self.status == 200:
-			status = status + "200 OK"
-		elif self.status == 204:
-			status = status + "204 No Content"
-		elif self.status == 400:
-			status = status + "400 Bad Request"
-		elif self.status == 401:
-			status = status + "401 Unauthorized"
-		elif self.status == 403:
-			status = status + "403 Forbidden"
-		elif self.status == 404:
-			status = status + "404 Not Found"
-		elif self.status == 405:
-			status = status + "405 Method Not Allowed"
-		elif self.status == 408:
-			status = status + "408 Request Timeout"
-		elif self.status == 410:
-			status = status + "410 Gone"
-		elif self.status == 414:
-			status = status + "414 URI Too Long"
-		elif self.status == 418:
-			status = status + "418 I'm a teapot"
-		elif self.status == 429:
-			status = status + "429 Too Many Requests"
-		elif self.status == 431:
-			status = status + "431 Request Header Fields Too Large"
-		else:
-			status = status + "500 Internal Server Error"
-
-		return status
+		return "HTTP/1.1 %s %s" % (self.status, http_status_codes[self.status])
 
 	# Generate HTTP headers
 	def http_headers(self):

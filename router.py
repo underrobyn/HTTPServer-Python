@@ -40,8 +40,8 @@ class HTTPRouter:
 		self.responder.body = http_files.load_file_content(request_file)
 
 	def handle_post_request(self):
-		self.responder.status = 405
-		print("Method not implemented: %s" % self.responder.request_protocol)
+		self.responder.status = 501
+		print("Not Implemented: %s" % self.responder.request_protocol)
 
 	def invalid_request_method(self):
 		self.responder.status = 400

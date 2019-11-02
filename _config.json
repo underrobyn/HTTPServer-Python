@@ -1,27 +1,28 @@
 {
-    "console": {
-        "log_level": 4
-    },
+	"console": {
+		"log_level": 4
+	},
 
-    "logs": {
-        "log_dir": "logs",
-        "timestamp": true,
-        "log_events": {
-            "http_event": true,
-            "sever_event": true
-        }
-    },
+	"logs": {
+		"enabled": true,
+		"log_dir": "logs",
+		"timestamp": true,
+		"log_events": {
+			"http_event": true,
+			"sever_event": true
+		}
+	},
 
-    "router": {
-        "config_file": ".httpconf",
-        "http_docs": "www"
-    },
+	"router": {
+		"config_file": ".httpconf",
+		"http_docs": "www"
+	},
 
-    "socket": {
-        "host": "0.0.0.0",
-        "port": 3698,
-        "timeout": 30,
-        "max_clients": 1000,
-        "recv_size": 1024
-    }
+	"socket": {
+		"host": "0.0.0.0",
+		"port": 3698,
+		"timeout": 30,
+		"max_clients": 1000,
+		"recv_size": 1024
+	}
 }

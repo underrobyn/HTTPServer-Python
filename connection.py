@@ -45,7 +45,7 @@ class HTTPClient(Thread):
 				return
 
 			if len(sock_read) > 0:
-				received = self.conn.recv(1024)
+				received = self.conn.recv(config["socket"]["recv_size"])
 
 				if len(received) == 0:
 					c.log(c.WARN, "Socket connected to %s has been closed" % (self.addr,))

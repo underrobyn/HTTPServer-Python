@@ -102,9 +102,6 @@ class HTTPResponder:
 		# Now we can formulate a valid HTTP response
 		response = ""
 
-		# Generate content-length header
-		self.content_length()
-
 		# Add protocol and status
 		response = response + self.http_status()
 

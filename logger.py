@@ -5,6 +5,10 @@ from settings import config
 class HTTPLog:
 
 	def __init__(self, log_level, log_name, log_format):
+		if not config["logs"]["enabled"]:
+			print("[*]-> Logs are disabled in _config.json")
+			return
+
 		self.log_level = log_level
 		self.log_name = log_name
 		self.log_format = log_format
@@ -46,6 +50,8 @@ class HTTPLog:
 		return "[" + str(time()) + "]: "
 
 	def log(self, data):
+		if not config["logs"]["enabled"]: return
+
 		line = ""
 
 		if self.log_format == "csv":

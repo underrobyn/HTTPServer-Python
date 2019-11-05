@@ -54,8 +54,11 @@ class HTTPLog:
 
 		line = ""
 
+		# TODO: Have logs conform to "Common Log Format"
 		if self.log_format == "csv":
 			return
+		elif self.log_format == "common":
+			return 
 		elif self.log_format == "text":
 			if config["logs"]["timestamp"]:
 				line = line + self.get_time_string()

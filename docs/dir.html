@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="UTF-8">
+		<title>Directory Listing</title>
+
+	</head>
+	<body>
+
+		<h1>File Index: {{server::requested_uri}}</h1>
+		<div>
+			{{server::special|directory_listing}}
+		</div>
+
+	</body>
+</html>

@@ -1,5 +1,5 @@
-from sock import HTTPSock
-from settings import config
+from lib.sock import HTTPSock
+from lib.settings import config
 
 def main():
     server = HTTPSock()

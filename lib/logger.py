@@ -1,6 +1,6 @@
 from time import time
-from utils import *
-from settings import config
+from lib.utils import *
+from lib.settings import config
 
 class HTTPLog:
 

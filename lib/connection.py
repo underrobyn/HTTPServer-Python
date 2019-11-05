@@ -1,7 +1,7 @@
 from threading import *
 from time import time
-from response import HTTPResponder
-from settings import (config, log)
+from lib.response import HTTPResponder
+from lib.settings import (config, log)
 import select
 
 class HTTPClient(Thread):

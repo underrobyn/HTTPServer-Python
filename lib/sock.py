@@ -1,7 +1,6 @@
 from threading import *
-from connection import HTTPClient
-from logger import HTTPLog
-from settings import config
+from lib.connection import HTTPClient
+from lib.logger import HTTPLog
 import socket
 
 class HTTPSock(Thread):

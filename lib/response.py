@@ -1,5 +1,4 @@
-from router import HTTPRouter
-from settings import config
+from lib.router import HTTPRouter
 
 http_status_codes = {
 	200:"OK",

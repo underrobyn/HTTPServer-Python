@@ -1,4 +1,4 @@
-from settings import (config, http_files)
+from lib.settings import (http_files)
 
 class HTTPRouter:
 

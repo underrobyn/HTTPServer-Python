@@ -1,6 +1,6 @@
 from json import loads
-from utils import *
-from content import FileServe
+from lib.utils import *
+from lib.content import FileServe
 
 config = {}
 file = "_config.json"

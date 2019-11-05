@@ -1,10 +1,10 @@
 {
 	"console": {
-		"log_level": 4
+		"log_level": 1
 	},
 
 	"logs": {
-		"enabled": true,
+		"enabled": false,
 		"log_dir": "logs",
 		"timestamp": true,
 		"log_events": {

@@ -1,6 +1,7 @@
 from threading import *
 from lib.connection import HTTPClient
 from lib.logger import HTTPLog
+from lib.settings import log
 import socket
 
 class HTTPSock(Thread):
@@ -13,7 +14,7 @@ class HTTPSock(Thread):
 		# Update timeout settings
 		if socket.getdefaulttimeout() != self.timeout:
 			socket.setdefaulttimeout(self.timeout)
-			print("Updated socket timeout, new value: %s" % self.timeout)
+			log(1,"Updated socket timeout, new value: %s" % self.timeout)
 
 		# Make server listen for connections
 		self.sock.bind((self.host, self.port))
@@ -34,7 +35,7 @@ class HTTPSock(Thread):
 		self.timeout = 30 if "timeout" not in settings["socket"] else settings["socket"]["timeout"]
 
 	def listen(self):
-		print("Socket server running on %s:%s" % (self.host, self.port))
+		log(2,"Socket server running on %s:%s" % (self.host, self.port))
 
 		while True:
 			conn, address = self.sock.accept()
@@ -45,13 +46,13 @@ class HTTPSock(Thread):
 			self.clients.append(c)
 			self.client_count = self.client_count + 1
 
-			print("Socket connected: %s" % address[0])
+			log(2,"Socket connected: %s" % address[0])
 
 	def close(self):
-		print("Closing server socket %s:%s" % (self.host, self.port))
+		log(2,"Closing server socket %s:%s" % (self.host, self.port))
 
 		# If the socket still exists, close it
 		if self.sock:
 			self.sock.close()
 			self.sock = None
-			print("Socket closed.")
+			log(1,"Socket closed.")

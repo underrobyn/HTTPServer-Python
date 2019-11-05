@@ -1,4 +1,4 @@
-from lib.settings import (http_files, server_docs)
+from lib.settings import (http_files, server_docs, log)
 
 class HTTPRouter:
 
@@ -50,7 +50,7 @@ class HTTPRouter:
 
 	def handle_post_request(self):
 		self.responder.status = 501
-		print("Not Implemented: %s" % self.responder.request_protocol)
+		log(3,"Not Implemented: %s" % self.responder.request_protocol)
 
 	def handle_head_request(self):
 		# Run request as GET
@@ -62,4 +62,4 @@ class HTTPRouter:
 
 	def invalid_request_method(self):
 		self.responder.status = 400
-		print("Invalid request method: %s" % self.responder.request_protocol)
+		log(3,"Invalid request method: %s" % self.responder.request_protocol)

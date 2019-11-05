@@ -1,4 +1,4 @@
-from lib.settings import (http_files)
+from lib.settings import (http_files, server_docs)
 
 class HTTPRouter:
 
@@ -41,6 +41,7 @@ class HTTPRouter:
 
 		if file_status != 200:
 			self.responder.status = file_status
+			self.responder.body = server_docs.error_page(file_status)
 			return
 
 		file_cont = http_files.load_file_content(request_file)

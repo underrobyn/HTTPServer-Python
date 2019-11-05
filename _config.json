@@ -16,7 +16,13 @@
 	"router": {
 		"config_file": ".httpconf",
 		"http_docs": "www",
-		"server_docs": "docs"
+		"server_docs": "docs",
+		"index_file": [
+			"index.html",
+			"index.htm",
+			"default.html",
+			"default.htm"
+		]
 	},
 
 	"socket": {

@@ -1,4 +1,5 @@
-from lib.settings import (http_files, server_docs, log)
+from lib.settings import (http_files, server_docs, log, config)
+from lib.utils import *
 
 class HTTPRouter:
 
@@ -20,13 +21,30 @@ class HTTPRouter:
 		else:
 			self.invalid_request_method()
 
-	def get_request_file(self, file):
-		request_file = file[1:]
+	def get_index_file(self, dir):
+		rel_dir = http_files.get_rel_link(dir)
+		valid_indexes = config["router"]["index_file"]
+		index_file = ""
 
-		if len(request_file) == 0:
-			return "index.html"
+		if not check_dir_exists(rel_dir):
+			return ""
+
+		print(dir)
+		print(list_dir_contents(rel_dir))
+
+		for i in list_dir_contents(rel_dir):
+			print(i)
+			if i in valid_indexes:
+				index_file = i
+				break
+
+		return index_file
+
+	def get_request_file(self, file):
+		if file[-1] == "/" or len(file[1:]) == 0:
+			return self.get_index_file(file)
 		else:
-			return request_file
+			return file
 
 	def set_response(self, status, body):
 		self.responder.status = status
@@ -34,7 +52,13 @@ class HTTPRouter:
 		self.responder.content_length()
 
 	def handle_get_request(self):
+		rel_link = http_files.get_rel_link(self.responder.request_uri)
 		request_file = self.get_request_file(self.responder.request_uri)
+
+		if request_file == "" and check_dir_exists(rel_link):
+			self.responder.body = server_docs.directory_list(rel_link)
+			return
+
 		file_status = http_files.load_file_status(request_file)
 
 		print("Attempting: status[%s] for GET %s" % (file_status, request_file))

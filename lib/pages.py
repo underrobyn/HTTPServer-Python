@@ -20,7 +20,8 @@ class ServerPages:
 
 
 	def var_rule_time(self, content):
-		print(content)
+		# print(content)
+		pass
 
 	def parse_vars(self, content):
 		rules = match(r"{{[a-z]+::[a-z_|]+\}\}", content)
@@ -32,6 +33,7 @@ class ServerPages:
 		dir_list_html = self.get_file_content(rel_file)
 
 		self.parse_vars(dir_list_html)
+		list_dir_contents(directory)
 
 		return dir_list_html
 

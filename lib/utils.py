@@ -1,4 +1,5 @@
 import os
+from glob import glob
 
 # File and Directory functions
 def update_dir_link(dir):
@@ -34,4 +35,8 @@ def check_can_read(file):
 
 def check_can_write(file):
 	return os.access(file, os.W_OK)
+
+def list_dir_contents(dir):
+	# return [i for i in glob("%s*" % dir)]
+	return [i for i in os.listdir(dir)]
 

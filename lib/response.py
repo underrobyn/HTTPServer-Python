@@ -29,6 +29,8 @@ class HTTPResponder:
 		# Request variables
 		self.request_method = "GET"
 		self.request_uri = "/"
+		self.query_string = ""
+		self.query_string_dict = {}
 		self.request_protocol = "/"
 		self.request_headers = {}
 
@@ -70,6 +72,26 @@ class HTTPResponder:
 		self.request_method = protocol[0]
 		self.request_uri = protocol[1]
 		self.request_protocol = protocol[2]
+		
+		if '?' in self.request_uri:
+			qss = self.request_uri.split("?")
+			self.request_uri = qss[0]
+			self.query_string = qss[1]
+		
+		if len(self.query_string) > 0:
+			kv_pairs = self.query_string.split("&")
+			
+			for kvpair in kv_pairs:
+				value = '1'
+				key = kvpair
+				
+				if '=' in kvpair:
+					kvdata = kvpair.split("=")
+					key = kvdata[0]
+					value = kvdata[1]
+				
+				self.query_string_dict[key] = value
+			
 
 	def content_length(self):
 		self.headers["Content-Length"] = len(self.body)
